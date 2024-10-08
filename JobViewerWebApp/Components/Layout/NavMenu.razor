@@ -1,0 +1,32 @@
+﻿@using JobViewerWebApp.Services
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Routing
+@rendermode InteractiveServer
+
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse d-lg-flex" id="navbarNav">
+            <a class="navbar-brand" href="/">
+                <img src="/images/evertwist.png" alt="Logo" width="30" height="28" class="d-inline-block align-text-top">
+                Jobs Viewer
+            </a>
+            <ul class="navbar-nav col-md-auto justify-content-lg-center">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="sysjobs">Jobs</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="sysjobshistories">Jobs Fallidos</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="jobshistory-search">Buscar Job History</NavLink>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

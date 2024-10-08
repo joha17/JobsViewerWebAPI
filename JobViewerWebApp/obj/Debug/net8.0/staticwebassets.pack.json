@@ -1,0 +1,109 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\JobViewerWebApp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\JobViewerWebApp.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\evertwist.ico",
+      "PackagePath": "staticwebassets\\evertwist.ico"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\Logonavbar.png",
+      "PackagePath": "staticwebassets\\images\\Logonavbar.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\TasksIndex-image.png",
+      "PackagePath": "staticwebassets\\images\\TasksIndex-image.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\background1.png",
+      "PackagePath": "staticwebassets\\images\\background1.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\background2.png",
+      "PackagePath": "staticwebassets\\images\\background2.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\background3.png",
+      "PackagePath": "staticwebassets\\images\\background3.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\evertec-logo.png",
+      "PackagePath": "staticwebassets\\images\\evertec-logo.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\evertecblack.png",
+      "PackagePath": "staticwebassets\\images\\evertecblack.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\evertecfooter.png",
+      "PackagePath": "staticwebassets\\images\\evertecfooter.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\evertwist.ico",
+      "PackagePath": "staticwebassets\\images\\evertwist.ico"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\evertwist.png",
+      "PackagePath": "staticwebassets\\images\\evertwist.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\images\\opciones.png",
+      "PackagePath": "staticwebassets\\images\\opciones.png"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\js\\audioControl.js",
+      "PackagePath": "staticwebassets\\js\\audioControl.js"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\js\\clipboard.js",
+      "PackagePath": "staticwebassets\\js\\clipboard.js"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\js\\sound.js",
+      "PackagePath": "staticwebassets\\js\\sound.js"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\navmenu.css",
+      "PackagePath": "staticwebassets\\navmenu.css"
+    },
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobViewerWebApp\\wwwroot\\sound\\chord.wav",
+      "PackagePath": "staticwebassets\\sound\\chord.wav"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.JobViewerWebApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.JobViewerWebApp.props",
+      "PackagePath": "build\\JobViewerWebApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.JobViewerWebApp.props",
+      "PackagePath": "buildMultiTargeting\\JobViewerWebApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.JobViewerWebApp.props",
+      "PackagePath": "buildTransitive\\JobViewerWebApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

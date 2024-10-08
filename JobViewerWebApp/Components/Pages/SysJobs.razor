@@ -1,0 +1,155 @@
+﻿@page "/sysjobs"
+@using JobViewerWebApp.Models
+@using JobViewerWebApp.Services
+@inject SysJobsService SysJobsServices
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+
+<p></p>
+<h3>Jobs</h3>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="dropdown">
+                <select id="serverDropdown" class="btn btn-secondary dropdown-toggle" type="button" @bind="selectedServer">
+                    <option value="">-- Seleccione el Server --</option>
+                    @if (servers != null)
+                    {
+                        @foreach (var server in servers)
+                        {
+                            <option value="@server.Server">@server.Server</option>
+                        }
+                    }
+                </select>
+                <button class="btn btn-primary" @onclick="FilterJobs">
+                    <i class="fa-solid fa-filter"></i> Filtrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p></p>
+
+@if (filteredJobs == null)
+{
+    <div class="d-flex align-items-center">
+        <strong role="status">Cargando...</strong>
+        <div class="spinner-border ms-auto" aria-hidden="true"></div>
+    </div>
+}
+else if (!filteredJobs.Any())
+{
+    <p>No se encontraron Jobs.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Job Id</th>
+                <th>Nombre</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Modificación</th>
+                <th>Server</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sysjob in filteredJobs)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-dark" @onclick="() => CopyToClipboard(sysjob.Job_Id)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </td>
+                    <td>@sysjob.Job_Id</td>
+                    <td>@sysjob.Name</td>
+                    <td>@sysjob.Date_Created.ToString("dd/MM/yyyy hh:mm:ss")</td>
+                    <td>@sysjob.Date_Modified.ToString("dd/MM/yyyy hh:mm:ss")</td>
+                    <td>@sysjob.Server</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+@code {
+    private string selectedServer;
+    private List<SysJob> filteredJobs;
+    private List<SysJob> servers;
+    private Timer? timer;
+    private bool? FilterEnable = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+
+            // Llamar inicialmente para obtener los datos
+            await LoadItemsAsync();
+
+            // Crear un Timer que actualice la lista cada 5 segundos (5000 ms)
+            timer = new Timer(async _ => await LoadItemsAsync(), null, 0, 3600000);
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al obtener jobs: {ex.Message}");
+        }
+    }
+
+    private async Task FilterJobs()
+    {
+        FilterEnable = true;
+        if (!string.IsNullOrEmpty(selectedServer))
+        {
+            filteredJobs = (await SysJobsServices.GetSysJobsAsync())
+                .Where(j => j.Server == selectedServer)
+                .ToList();
+        }
+        else
+        {
+            FilterEnable = false;
+            filteredJobs = await SysJobsServices.GetSysJobsAsync();
+        }
+    }
+
+    private async Task LoadItemsAsync()
+    {
+        try
+        {
+            if (FilterEnable == false)
+            {
+                filteredJobs = await SysJobsServices.GetSysJobsAsync();
+                servers = await SysJobsServices.GetDistinctServersAsync();
+
+                // Forzar la actualización de la interfaz
+                InvokeAsync(StateHasChanged);
+            }
+            
+        }
+        catch (Exception ex)
+        {
+            // Manejo de errores, podrías agregar lógica de manejo o logs
+            Console.WriteLine($"Error al cargar los items: {ex.Message}");
+        }
+    }
+
+    public void Dispose()
+    {
+        // Liberar el Timer cuando el componente se destruya
+        timer?.Dispose();
+    }
+
+
+    private async Task CopyToClipboard(Guid text)
+    {
+        await JSRuntime.InvokeVoidAsync("copyToClipboard", text);
+    }
+
+}

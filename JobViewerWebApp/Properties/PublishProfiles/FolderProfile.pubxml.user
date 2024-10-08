@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\jcervantes\source\repos\JobsViewer_API\JobViewerWebApp\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2024-09-26T19:11:43.3437063Z||;True|2024-09-24T12:52:46.9980799-06:00||;True|2024-09-19T17:29:18.3442758-06:00||;True|2024-09-13T11:15:24.7900437-06:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

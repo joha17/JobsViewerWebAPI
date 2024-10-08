@@ -1,0 +1,196 @@
+﻿@page "/sysjobshistories"
+@using JobViewerWebApp.Models
+@using JobViewerWebApp.Services
+@inject IJSRuntime JSRuntime
+@inject SysJobsHistoryService SysJobsHistoryServices
+@rendermode InteractiveServer
+
+<p></p>
+<h4>Jobs Fallidos</h4>
+<p></p>
+
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="dropdown">
+                    <select id="serverDropdown" class="btn btn-secondary dropdown-toggle" type="button" @bind="selectedServer">
+                        <option value="">-- Seleccione el Server --</option>
+                        @if (servers != null)
+                        {
+                            @foreach (var server in servers)
+                            {
+                                <option value="@server.Server">@server.Server</option>
+                            }
+                        }
+                    </select>
+                    <button class="btn btn-primary" @onclick="FilterJobs">
+                        <i class="fa-solid fa-filter"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p></p>
+
+@if (filteredJobs == null)
+{
+    <div class="d-flex align-items-center">
+        <strong role="status">Cargando...</strong>
+        <div class="spinner-border ms-auto" aria-hidden="true"></div>
+    </div>
+}
+else if (!filteredJobs.Any())
+{
+    <p>No se encontraron jobs con errores.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Job Id</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Duración</th>
+                <th>Estado</th>
+                <th>Server</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sysjobshistory in filteredJobs)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-dark" @onclick="() => CopyToClipboard(sysjobshistory.job_id)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </td>
+                    <td>@sysjobshistory.job_id</td>
+                    <td>@sysjobshistory.job_name</td>
+                    <td>@sysjobshistory.Run_Date</td>
+                    <td>@sysjobshistory.Run_Time</td>
+                    <td>@sysjobshistory.Run_Duration</td>
+                    @if (sysjobshistory.Run_Status == 0)
+                    {
+                        <td><button class="btn btn-danger"><i class="fa-solid fa-circle-exclamation"></i> Error</button></td>
+                    }
+                    else if (sysjobshistory.Run_Status == 1)
+                    {
+                        <td><button class="btn btn-success">Success</button></td>
+                    }
+                    else if (sysjobshistory.Run_Status == 2)
+                    {
+                        <td><button class="btn btn-info">Retry</button></td>
+                    }
+                    else if (sysjobshistory.Run_Status == 3)
+                    {
+                        <td><button class="btn btn-warning">Canceled</button></td>
+                    }
+                    else
+                    {
+                        <td><button class="btn btn-secondary">In Progress</button></td>
+                    }
+
+                    <td>@sysjobshistory.Server</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+@code {
+    private string selectedServer;
+    private List<SysJobHistory> filteredJobs;
+    private List<SysJobHistory> servers;
+    private Timer? timer;
+    private bool? FilterEnable = false;
+    private bool MuteSound;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Llamar inicialmente para obtener los datos
+            await LoadItemsAsync();
+
+            // Crear un Timer que actualice la lista cada 5 segundos (5000 ms)
+            timer = new Timer(async _ => await LoadItemsAsync(), null, 0, 10000);
+
+            await JSRuntime.InvokeVoidAsync("refrescarPaginaConTimer", 3600000);
+
+        }
+        catch (Exception ex)
+        {
+            // Manejo de errores, por ejemplo, logueo o notificación al usuario
+            Console.WriteLine($"Error al obtener los jobs: {ex.Message}");
+        }
+    }
+
+    private async Task FilterJobs()
+    {
+        FilterEnable = true;
+        if (!string.IsNullOrEmpty(selectedServer))
+        {
+            filteredJobs = (await SysJobsHistoryServices.GetSysJobsHistoryAsync())
+                .Where(j => j.Server == selectedServer)
+                .ToList();
+        }
+        else
+        {
+            FilterEnable = false;
+            filteredJobs = await SysJobsHistoryServices.GetSysJobsHistoryAsync();
+        }
+    }
+
+
+    private async Task LoadItemsAsync()
+    {
+        try
+        {
+            if (FilterEnable == false)
+            {
+                filteredJobs = await SysJobsHistoryServices.GetSysJobsHistoryAsync();
+                servers = await SysJobsHistoryServices.GetDistinctServersAsync();
+
+                // Forzar la actualización de la interfaz
+                InvokeAsync(StateHasChanged);
+
+
+                if (filteredJobs.Any() && MuteSound == false)
+                {
+                    await JSRuntime.InvokeVoidAsync("playSound");
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+            // Manejo de errores, podrías agregar lógica de manejo o logs
+            Console.WriteLine($"Error al cargar los items: {ex.Message}");
+        }
+    }
+
+    public void Dispose()
+    {
+        // Liberar el Timer cuando el componente se destruya
+        timer?.Dispose();
+    }
+
+    private async Task CopyToClipboard(Guid text)
+    {
+        await JSRuntime.InvokeVoidAsync("copyToClipboard", text);
+    }
+
+    // private async Task CheckForNewRecord()
+    // {
+    //     MuteSound = SysJobsHistoryServices.CheckMuteSound(MuteSound);
+    // }
+
+}

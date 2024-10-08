@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobsViewer_API\\wwwroot\\ExceptionJobs.txt",
+      "PackagePath": "staticwebassets\\ExceptionJobs.txt"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.JobsViewer_API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.JobsViewer_API.props",
+      "PackagePath": "build\\JobsViewer_API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.JobsViewer_API.props",
+      "PackagePath": "buildMultiTargeting\\JobsViewer_API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.JobsViewer_API.props",
+      "PackagePath": "buildTransitive\\JobsViewer_API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

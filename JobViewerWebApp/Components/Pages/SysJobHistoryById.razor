@@ -1,0 +1,133 @@
+﻿@page "/jobshistory-search"
+@using JobViewerWebApp.Models
+@using JobViewerWebApp.Services
+@inject SysJobsHistoryService SysJobsHistoryService
+@rendermode InteractiveServer
+
+<p></p>
+<h4>Buscar historico de Jobs por ID</h4>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <input @bind="inputId" placeholder="Digite o pegue el Job Id" type="text" class="form-control" />
+            </div>
+            <button @onclick="SearchItems" class="btn btn-primary mt-2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+<p></p>
+
+
+@if (isLoading)
+{
+    <div class="d-flex align-items-center">
+        <strong role="status">Cargando...</strong>
+        <div class="spinner-border ms-auto" aria-hidden="true"></div>
+    </div>
+}
+else if (hasError)
+{
+    <p>Error cargando historico.</p>
+}
+else if (sysJobsHistories != null && sysJobsHistories.Count > 0)
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Job Id</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Duración</th>
+                <th>Server</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sysjobshistory in sysJobsHistories)
+            {
+                <tr>
+                    <td>@sysjobshistory.job_id</td>
+                    <td>@sysjobshistory.job_name</td>
+                    <td>@sysjobshistory.Run_Date</td>
+                    <td>@sysjobshistory.Run_Time</td>
+                    <td>@sysjobshistory.Run_Duration</td>
+                    <td>@sysjobshistory.Server</td>
+                    @if (sysjobshistory.Run_Status == 0)
+                    {
+                        <td><button class="btn btn-danger">Failed</button></td>
+                    }
+                    else if (sysjobshistory.Run_Status == 1)
+                    {
+                        <td><button class="btn btn-success">Success</button></td>
+                    }
+                    else if (sysjobshistory.Run_Status == 2)
+                    {
+                        <td><button class="btn btn-info">Retry</button></td>
+                    }
+                    else if (sysjobshistory.Run_Status == 3)
+                    {
+                        <td><button class="btn btn-warning">Canceled</button></td>
+                    }
+                    else
+                    {
+                        <td><button class="btn btn-secondary">In Progress</button></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrEmpty(inputId))
+{
+    <p>No existe historial para este Job @inputId</p>
+}
+
+
+@code {
+
+    private string inputId;
+    private List<SysJobHistory> sysJobsHistories;
+    private bool isLoading;
+    private bool hasError;
+    private bool Notfound;
+
+
+
+    private async Task SearchItems()
+    {
+        if (Guid.TryParse(inputId, out Guid id))
+        {
+            isLoading = true;
+            try
+            {
+                sysJobsHistories = await SysJobsHistoryService.GetSysJobsHistoryByIdAsync(id);
+
+                if (sysJobsHistories == null || !sysJobsHistories.Any())
+                {
+                    Notfound = true;
+                }
+            }
+            catch
+            {
+                hasError = true;
+            }
+            finally
+            {
+                isLoading = false;
+            }
+        }
+        else
+        {
+            sysJobsHistories = null;
+            hasError = true;
+        }
+    }
+}

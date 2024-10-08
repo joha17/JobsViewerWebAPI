@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "dbOq5JF8Md4+f8E+38HGuufpvGroL/4cmdzEvPvXE88=",
+  "Source": "JobsViewer_API",
+  "BasePath": "_content/JobsViewer_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "JobsViewer_API\\wwwroot",
+      "Source": "JobsViewer_API",
+      "ContentRoot": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobsViewer_API\\wwwroot\\",
+      "BasePath": "_content/JobsViewer_API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobsViewer_API\\wwwroot\\ExceptionJobs.txt",
+      "SourceId": "JobsViewer_API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\jcervantes\\source\\repos\\JobsViewer_API\\JobsViewer_API\\wwwroot\\",
+      "BasePath": "_content/JobsViewer_API",
+      "RelativePath": "ExceptionJobs.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ExceptionJobs.txt"
+    }
+  ]
+}

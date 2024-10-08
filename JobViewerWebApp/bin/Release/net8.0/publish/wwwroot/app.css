@@ -1,0 +1,12 @@
+.home-background {
+    /*background-image: url('images/background3.png');
+    background-size: cover;*/ /* Ajusta la imagen para que cubra todo el contenedor */
+    /*background-position: center;*/ /* Centra la imagen */
+    /*background-repeat: no-repeat;*/ /* Evita que la imagen se repita */
+    min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana */
+    color: white; /* Color del texto para que sea visible sobre la imagen de fondo */
+}
+
+/*body {
+    background-color: powderblue;
+}*/
